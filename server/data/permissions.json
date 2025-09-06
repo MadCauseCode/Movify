@@ -1,0 +1,43 @@
+  {
+    "permissions": [
+      "createMovies",
+      "deleteMovies",
+      "viewMovies",
+      "createUsers",
+      "syncMembers",
+      "handleMembers",
+      "viewMembers",
+      "manageUsers",
+      "manageSelf",
+      "createSubscriptions",
+      "viewSubscriptions"
+    ],
+    "roles": {
+      "admin": [
+        "createMovies",
+        "deleteMovies",
+        "viewMovies",
+        "createUsers",
+        "syncMembers",
+        "handleMembers",
+        "manageUsers",
+        "createSubscriptions",
+        "viewSubscriptions",
+        "viewMembers"
+      ],
+      "moderator": [
+        "createMovies",
+        "viewMovies",
+        "handleMembers",
+        "viewSubscriptions",
+        "createSubscriptions",
+        "viewMembers"
+      ],
+      "user": [
+        "viewMovies",
+        "viewSubscriptions",
+        "createSubscriptions",
+        "viewMembers"
+      ]
+    }
+  }

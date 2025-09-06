@@ -1,0 +1,21 @@
+[
+  {
+    "username": "admin",
+    "passwordHash": "$2b$10$4E0xuQPk/.S6/y/LV2E9xeKjHcY3.WnpGwCCVD7cM72PfqPp.27E.",
+    "mustChangePassword": false,
+    "role": "admin",
+    "createdDate": "2025-09-01T09:00:00.000Z",
+    "sessionTimeOut": 60,
+    "perms": [
+      "createMovies",
+        "deleteMovies",
+        "viewMovies",
+        "createUsers",
+        "syncMembers",
+        "handleMembers",
+        "manageUsers",
+        "createSubscriptions",
+        "viewSubscriptions"
+    ]
+  }
+]
