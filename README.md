@@ -1,52 +1,50 @@
-# 🎬 Cinema Management System
+# 🎬 Movify – Cinema Management System
 
+A **full-stack web application** for managing **movies, members, and their subscriptions**.  
+Built with **React (frontend)**, **Node.js/Express (backend)**, and **MongoDB (database)**.  
 
-A full-stack web application for managing **movies, members, and their subscriptions**. 
-Built as a **final project** using **React** for the front end, **Node.js/Express** for the back end, and **MongoDB** as the database. 
-
-
-The platform allows authenticated users to browse and manage movies, maintain member records, track watched movies, and create or update subscriptions — all from a clean, responsive interface. 
-
+This project was created as my **Technion Full-Stack Development final project**.  
+I implemented the backend (Express/MongoDB), the frontend (React/Router), authentication (JWT), and data modeling myself.
 
 ---
 
+## ✨ Project Highlights
+- Role-based JWT authentication  
+- Full CRUD with MongoDB & Mongoose  
+- Protected routes in React Router  
+- Seed scripts for initial data  
+
+---
 
 ## 🚀 Features
 
-
 ### 🔐 Authentication
 - Secure login with **username & password**
+- JWT-based authentication
 - Error handling for failed login attempts
-- Persistent display of the logged-in user’s name across all pages
-
+- Persistent display of the logged-in user’s name across pages
 
 ### 🎬 Movies Management
-- **All Movies page**: list all movies with name, year, poster image, genres, and members who watched them 
-- **Search movies** by name 
-- **Edit / Delete movies** (deletion also removes related subscription entries) 
-- **Add Movie page**: create new movies with name, year, genres, and image URL 
-- **Edit Movie page**: update movie details and save changes 
-
+- **All Movies**: list movies with name, genres, premiere date, and poster
+- **Search** by name
+- **Create/Edit/Delete** movies  
+  (deleting a movie also removes related subscriptions)
 
 ### 🎟️ Subscriptions Management
-- **All Members page**: view all members, their email, city, and movies watched 
-- View movies watched by each member (clickable links filter the Movies page) 
-- **Add Member page** (restricted to authorized users) 
-- Subscribe a member to a new movie with a selected date 
-
+- **All Members**: list members with name, email, and city
+- See movies watched by each member
+- **Create Member** and **Sync Members from API** (JSONPlaceholder integration)
+- Subscribe a member to a movie with a chosen date
 
 ---
 
-
 ## 🗂️ Data Model
-
 
 **Users**
 - `id`
 - `fullName`
 - `username`
 - `password`
-
 
 **Movies**
 - `id`
@@ -55,12 +53,10 @@ The platform allows authenticated users to browse and manage movies, maintain me
 - `genres` (array of strings)
 - `imageUrl`
 
-
 **Members**
 - `id`
 - `email`
 - `city`
-
 
 **Subscriptions**
 - `id`
@@ -68,107 +64,140 @@ The platform allows authenticated users to browse and manage movies, maintain me
 - `memberId`
 - `date` (date watched)
 
-
----
-
-
-## 🛠️ Tech Stack
-- **Frontend**: React, React Router, CSS Modules / Styled Components 
-- **Backend**: Node.js, Express.js 
-- **Database**: MongoDB with Mongoose ORM (or SQL Server alternative) 
-- **Authentication**: JWT-based login system 
-
-
 ---
 
 ## ⚙️ Setup & Installation
 
-Follow these steps to run **Movify -- Cinema Management System**
-locally:
-
 ### 1. Clone the repository
-
-``` bash
+```bash
 git clone https://github.com/MadCauseCode/Movify.git
 cd Movify
 ```
 
 ### 2. Install dependencies
-
-Run inside the root folder:
-
-``` bash
+```bash
 npm install
 ```
 
 ### 3. Configure environment variables
-
 Create a `.env` file in the project root:
-
-``` env
+```env
 MONGO_URI=your-mongodb-uri
 JWT_SECRET=your-secret
 PORT=5000
 ```
 
--   **MONGO_URI** → Connection string to your MongoDB instance (Atlas or
-    local).\
-    Example:
-
-        mongodb://127.0.0.1:27017/movify
-
--   **JWT_SECRET** → Any random secure string, used to sign
-    authentication tokens.\
-
--   **PORT** → Default is `5000`, but you can change it if needed.
-
-⚠️ Make sure MongoDB is running locally or that you have access to your
-Atlas cluster.
+- `MONGO_URI` → MongoDB connection string (Atlas or local)  
+- `JWT_SECRET` → random secure string  
+- `PORT` → default: `5000`
 
 ### 4. Seed initial data (optional)
-
-If the project includes seeding scripts, run:
-
-``` bash
+If seeding scripts are available:
+```bash
 npm run seed
 ```
+This will insert:
+- Default **admin user**
+- Example movies
+- Example members
 
-This will insert sample **admin user**, **movies**, and **members**.
+> 🛡 Default Admin Login  
+> Username: `admin`  
+> Password: `admin1234`  
+> (unless customized in `.env` or seed file)
 
-> 🛡 Default Admin Login:\
-> Username: `admin`\
-> Password: `admin1234`\
-> (or check your `.env` / seeding script if customized)
-
-### 5. Start the server
-
-``` bash
+### 5. Run the backend
+```bash
 npm start
 ```
+Runs on <http://localhost:5000>
 
-The backend will run on <http://localhost:5000>.
-
-### 6. Start the client (if separate)
-
-If the React frontend lives in a `client/` folder:
-
-``` bash
+### 6. Run the frontend
+If React is in a `client/` folder:
+```bash
 cd client
 npm install
 npm start
 ```
+Runs on <http://localhost:3000>
 
-This will run the UI on <http://localhost:3000>.
+---
 
-------------------------------------------------------------------------
+## 📡 API Documentation
 
-✅ At this point, you should be able to **log in with the admin
-account** and explore the system.
+### Auth
+- `POST /api/auth/login` → login with username & password
 
+### Users
+- `GET /api/users` → list users (admin only)  
+- `POST /api/users` → create user (admin only)  
 
+### Movies
+- `GET /api/movies` → list all movies  
+- `POST /api/movies` → create a movie  
+- `PUT /api/movies/:id` → edit a movie  
+- `DELETE /api/movies/:id` → delete a movie  
 
-<img width="1680" height="1050" alt="Screenshot 2025-09-06 at 6 11 51" src="https://github.com/user-attachments/assets/a7a672e7-a5d3-4f2a-9a85-51ad7a138365" />
-<img width="1680" height="1050" alt="Screenshot 2025-09-06 at 6 12 00" src="https://github.com/user-attachments/assets/e538099d-ac9c-43fd-b66a-0e3af1102faf" />
-<img width="1680" height="1050" alt="Screenshot 2025-09-06 at 6 12 04" src="https://github.com/user-attachments/assets/af40b3a9-b22c-4d15-bcc6-4fbf0672d899" />
-<img width="1680" height="1050" alt="Screenshot 2025-09-06 at 6 12 07" src="https://github.com/user-attachments/assets/300ef700-011e-45cf-b45c-e82eca6e2610" />
-<img width="1680" height="1050" alt="Screenshot 2025-09-06 at 6 12 19" src="https://github.com/user-attachments/assets/6fb1301e-e8eb-4884-8aef-68a65fbdf885" />
+### Members
+- `GET /api/members` → list members  
+- `POST /api/members` → create member  
+- `PUT /api/members/:id` → edit member  
+- `DELETE /api/members/:id` → delete member  
+
+### Subscriptions
+- `GET /api/subscriptions` → list subscriptions  
+- `POST /api/subscriptions` → add movie to member  
+- `DELETE /api/subscriptions/:id` → remove subscription  
+
+---
+
+## 🖼️ Screenshots
+
+### Login
+<img src="https://github.com/user-attachments/assets/a7a672e7-a5d3-4f2a-9a85-51ad7a138365" width="600">
+
+### Movies
+<img src="https://github.com/user-attachments/assets/e538099d-ac9c-43fd-b66a-0e3af1102faf" width="600">
+
+### Edit Movie
+<img src="https://github.com/user-attachments/assets/6fb1301e-e8eb-4884-8aef-68a65fbdf885" width="600">
+
+### Members
+<img src="https://github.com/user-attachments/assets/af40b3a9-b22c-4d15-bcc6-4fbf0672d899" width="600">
+
+### Subscriptions
+<img src="https://github.com/user-attachments/assets/300ef700-011e-45cf-b45c-e82eca6e2610" width="600">
+
+---
+
+## 📚 Lessons Learned
+- Implementing **role-based access** with JWTs taught me secure authentication basics.  
+- Designing **relational data in MongoDB** (members ↔ subscriptions ↔ movies) gave me experience modeling real-world relationships in NoSQL.  
+- Building **protected routes** in React with React Router strengthened my understanding of client-side auth.  
+- I improved my workflow with **Postman API testing** and debugging backend errors quickly.  
+
+---
+
+## 🛠️ Tech Stack
+- **Frontend**: React, React Router, CSS Modules / Styled Components
+- **Backend**: Node.js, Express.js
+- **Database**: MongoDB (Mongoose ORM)
+- **Authentication**: JWT
+- **Other**: Axios, JSONPlaceholder API (for seeding members)
+
+---
+
+## 🌐 Hosting
+The project will soon be deployed (backend planned on Render, frontend on Vercel, and database on MongoDB Atlas).  
+A live demo link will be added here once available. 🚀
+
+---
+
+## 👤 Contributors
+- **[Oran Gal](https://github.com/MadCauseCode)** – Developer
+
+---
+
+## 📄 License
+This project is licensed under the [MIT License](LICENSE).
+
